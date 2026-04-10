@@ -1,0 +1,34 @@
+version: 1
+
+defaults:
+  synthesis:
+    speed: 1.0
+
+actors:
+  narrator:
+    provider: openai
+    model: gpt-4o-mini-tts
+    voice: alloy
+    locale: en-US
+    synthesis:
+      speed: 0.98
+
+  mina:
+    provider: elevenlabs
+    model: eleven_v3
+    voice: ZJCNdZEjYwkOElxugmW2
+    locale: ko-KR
+
+  sunhi:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: ko-KR-SunHiNeural
+    locale: ko-KR
+
+  james:
+    provider: cartesia
+    model: sonic-3
+    voice: calm_british_male
+    locale: en-US
+    synthesis:
+      speed: 0.97

@@ -1,0 +1,62 @@
+version: 1
+
+defaults:
+  synthesis:
+    speed: 1.0
+    format: mp3
+
+actors:
+  narrator:
+    provider: openai
+    model: gpt-4o-mini-tts
+    voice: alloy
+    locale: en-US
+    synthesis:
+      speed: 0.98
+
+  mina:
+    provider: elevenlabs
+    model: eleven_v3
+    voice: ZJCNdZEjYwkOElxugmW2
+    locale: ko-KR
+
+  sunhi:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: ko-KR-SunHiNeural
+    locale: ko-KR
+
+  james:
+    provider: cartesia
+    model: sonic-3
+    voice: calm_british_male
+    locale: en-GB
+    synthesis:
+      speed: 0.97
+
+  sujin:
+    provider: typecast
+    model: latest
+    voice: actor_24_letters
+    locale: ko-KR
+    synthesis:
+      speed: 1.1
+      volume: 1.2
+      pitch: 2
+    provider_options:
+      emotion_tone_preset: calm
+      xapi_hd: true
+
+  aria:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: en-US-AriaNeural
+    locale: en-US
+    synthesis:
+      speed: 1.05
+
+  clone:
+    provider: chatterbox
+    model: chatterbox-turbo
+    voice: default
+    locale: en-US
