@@ -1,8 +1,11 @@
 {
-  "name": "tts-cli",
+  "name": "@saroby/tts-cli",
   "version": "0.2.0",
   "description": "Actor-centric multi-provider TTS CLI",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "tts": "dist/cli/index.js"
   },
@@ -25,7 +28,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^24.7.2",
+    "@types/node": "^25.6.0",
     "eslint": "^10.2.0",
     "globals": "^17.4.0",
     "tsx": "^4.21.0",

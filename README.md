@@ -1,6 +1,12 @@
-# tts-cli
+# @saroby/tts-cli
 
 Actor-centric multi-provider TTS CLI.
+
+Install:
+
+```bash
+npm install -g @saroby/tts-cli
+```
 
 ## Scope
 
