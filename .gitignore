@@ -6,3 +6,4 @@ out
 __pycache__/
 .tts-cli/
 .venv-chatterbox/
+.env
