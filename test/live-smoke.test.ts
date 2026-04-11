@@ -27,7 +27,7 @@ const liveCases = [
   },
   {
     actor: "sujin",
-    credentials: ["TYPECAST_API_TOKEN", "TYPECAST_API_KEY"],
+    credentials: ["TYPECAST_API_KEY"],
     provider: "typecast",
   },
 ] as const;

@@ -32,7 +32,7 @@ const httpProviderCases = [
   },
   {
     actor: "sujin",
-    credentials: ["TYPECAST_API_TOKEN", "TYPECAST_API_KEY"],
+    credentials: ["TYPECAST_API_KEY"],
     expectedMimeType: "audio/mpeg",
     provider: "typecast",
     providerLabel: "Typecast",
@@ -110,7 +110,7 @@ describe("provider synthesize contract", () => {
   );
 
   it("typecast fails fast when the provider returns JSON on success", async () => {
-    stubCredentials(["TYPECAST_API_TOKEN", "TYPECAST_API_KEY"]);
+    stubCredentials(["TYPECAST_API_KEY"]);
     const fetchMock = vi.fn().mockImplementation(async () =>
       createJsonResponse(200, {
         result: "unexpected JSON envelope",

@@ -73,6 +73,20 @@ tts say \
   --out out/mina.mp3
 ```
 
+## 3.5. Chatterbox 런타임 준비
+
+Chatterbox는 Python 런타임이 별도로 필요하다.
+
+```bash
+tts setup chatterbox
+```
+
+실행 없이 계획만 보려면:
+
+```bash
+tts setup chatterbox --dry-run
+```
+
 ## 4. actor 정보를 보고 대사 작성
 
 ```bash

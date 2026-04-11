@@ -1,5 +1,6 @@
 import type { ActorCatalogState, ResolvedActor } from "../domain/actor/types.js";
 import type { RunExecutionResult, RunManifest, SayExecutionResult, SayPreview } from "../core/tts.js";
+import type { ChatterboxSetupResult } from "../providers/chatterbox-runtime.js";
 
 export function formatActorList(
   actors: ResolvedActor[],
@@ -147,6 +148,45 @@ export function formatRunSummary(result: RunExecutionResult): string {
 
   if (result.manifestPath) {
     lines.push(`manifest: ${result.manifestPath}`);
+  }
+
+  return lines.join("\n");
+}
+
+export function formatChatterboxSetupResult(result: ChatterboxSetupResult): string {
+  const lines = [
+    `provider: ${result.provider}`,
+    `status: ${result.status}`,
+    `runtime_python: ${result.runtime_python}`,
+    `venv_dir: ${result.venv_dir}`,
+    `config_path: ${result.config_path}`,
+    `already_ready: ${result.already_ready}`,
+  ];
+
+  if (result.bootstrap_python) {
+    lines.push(`bootstrap_python: ${result.bootstrap_python}`);
+  }
+
+  lines.push(
+    "",
+    "actions",
+    `  create_venv: ${result.actions.create_venv}`,
+    `  install_dependencies: ${result.actions.install_dependencies}`,
+    `  write_config: ${result.actions.write_config}`,
+  );
+
+  if (result.commands.length > 0) {
+    lines.push("", "commands");
+    for (const command of result.commands) {
+      lines.push(`  ${command.join(" ")}`);
+    }
+  }
+
+  if (result.notes.length > 0) {
+    lines.push("", "notes");
+    for (const note of result.notes) {
+      lines.push(`  ${note}`);
+    }
   }
 
   return lines.join("\n");

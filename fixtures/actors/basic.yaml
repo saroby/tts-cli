@@ -36,16 +36,16 @@ actors:
 
   sujin:
     provider: typecast
-    model: latest
-    voice: actor_24_letters
+    model: ssfm-v30
+    voice: tc_60e5426de8b95f1d3000d7b5
     locale: ko-KR
     synthesis:
       speed: 1.1
       volume: 1.2
       pitch: 2
     provider_options:
-      emotion_tone_preset: calm
-      xapi_hd: true
+      emotion_type: preset
+      emotion_preset: normal
 
   aria:
     provider: edge-tts

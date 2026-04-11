@@ -4,3 +4,5 @@ coverage
 .DS_Store
 out
 __pycache__/
+.tts-cli/
+.venv-chatterbox/

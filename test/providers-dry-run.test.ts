@@ -87,19 +87,22 @@ describe("provider dry-run previews", () => {
     expect(preview.request).toMatchObject({
       runtime: "http",
       method: "POST",
-      url: "https://typecast.ai/api/text-to-speech",
+      url: "https://api.typecast.ai/v1/text-to-speech",
       body: {
+        voice_id: "tc_60e5426de8b95f1d3000d7b5",
         text: "안녕하세요.",
-        tts_mode: "actor",
-        actor_id: "actor_24_letters",
-        lang: "ko-kr",
-        model_version: "latest",
-        xapi_audio_format: "mp3",
-        xapi_hd: true,
-        emotion_tone_preset: "calm",
-        tempo: 1.1,
-        volume: 120,
-        pitch: 2,
+        model: "ssfm-v30",
+        language: "kor",
+        prompt: {
+          emotion_type: "preset",
+          emotion_preset: "normal",
+        },
+        output: {
+          audio_format: "mp3",
+          audio_tempo: 1.1,
+          volume: 120,
+          audio_pitch: 2,
+        },
       },
     });
   });

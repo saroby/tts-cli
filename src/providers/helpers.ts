@@ -109,6 +109,84 @@ export function localeToLowerTag(locale: string | undefined): string | undefined
   return locale?.toLowerCase();
 }
 
+export function localeToIso6393(locale: string | undefined): string | undefined {
+  const language = localeToLanguage(locale);
+  if (!language) {
+    return undefined;
+  }
+
+  switch (language) {
+    case "ar":
+      return "ara";
+    case "bg":
+      return "bul";
+    case "cs":
+      return "ces";
+    case "da":
+      return "dan";
+    case "de":
+      return "deu";
+    case "el":
+      return "ell";
+    case "en":
+      return "eng";
+    case "es":
+      return "spa";
+    case "fi":
+      return "fin";
+    case "fr":
+      return "fra";
+    case "hi":
+      return "hin";
+    case "hr":
+      return "hrv";
+    case "hu":
+      return "hun";
+    case "id":
+      return "ind";
+    case "it":
+      return "ita";
+    case "ja":
+      return "jpn";
+    case "ko":
+      return "kor";
+    case "ms":
+      return "msa";
+    case "nl":
+      return "nld";
+    case "no":
+      return "nor";
+    case "pl":
+      return "pol";
+    case "pt":
+      return "por";
+    case "ro":
+      return "ron";
+    case "ru":
+      return "rus";
+    case "sk":
+      return "slk";
+    case "sv":
+      return "swe";
+    case "ta":
+      return "tam";
+    case "th":
+      return "tha";
+    case "tr":
+      return "tur";
+    case "uk":
+      return "ukr";
+    case "vi":
+      return "vie";
+    case "yue":
+      return "yue";
+    case "zh":
+      return "zho";
+    default:
+      return undefined;
+  }
+}
+
 export function relativeSpeedToPercent(speed: number | undefined): string {
   return relativeToPercent(speed);
 }

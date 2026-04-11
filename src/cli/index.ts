@@ -2,11 +2,12 @@
 
 import { Command } from "commander";
 
-import { formatActorDetails, formatActorList, formatRunManifest, formatRunSummary, formatSayPreview, formatSayResult } from "./format.js";
+import { formatActorDetails, formatActorList, formatChatterboxSetupResult, formatRunManifest, formatRunSummary, formatSayPreview, formatSayResult } from "./format.js";
 import { getActorOrThrow, loadActorRegistry } from "../domain/actor/loader.js";
 import { isActorHidden, saveActorStates, setActorHiddenState } from "../domain/actor/state.js";
 import { parseScriptFile } from "../domain/script/parser.js";
 import { dryRunSay, dryRunScript, executeSay, executeScript, prepareSpeech } from "../core/tts.js";
+import { ensureChatterboxRuntime } from "../providers/chatterbox-runtime.js";
 import { CliError } from "../shared/errors.js";
 import type { ActorCatalogState, ResolvedActor } from "../domain/actor/types.js";
 
@@ -41,6 +42,12 @@ interface ActorListOptions extends RegistryOptions, PrettyOption {
 
 interface ActorHideOptions extends RegistryOptions {
   reason?: string;
+}
+
+interface SetupCommandOptions extends PrettyOption {
+  dryRun?: boolean;
+  python?: string;
+  venv?: string;
 }
 
 function buildProgram(): Command {
@@ -149,6 +156,30 @@ function buildProgram(): Command {
       const actorStates = setActorHiddenState(registry.actorStates, actor.name, false);
       await saveActorStates(registry.actorStatePath, actorStates);
       printJson({ name: actor.name, hidden: false });
+    });
+
+  program
+    .command("setup")
+    .description("Prepare optional provider runtimes")
+    .command("chatterbox")
+    .description("Create a local Python runtime for the Chatterbox provider")
+    .option("--python <path>", "Python interpreter to use for the bootstrap step")
+    .option("--venv <path>", "Virtualenv directory to create or reuse")
+    .option("--dry-run", "Preview setup commands without executing them")
+    .option("--pretty", "Human-readable output instead of JSON")
+    .action(async (options: SetupCommandOptions) => {
+      const result = await ensureChatterboxRuntime({
+        dryRun: options.dryRun,
+        python: options.python,
+        venvDir: options.venv,
+      });
+
+      if (options.pretty) {
+        console.log(formatChatterboxSetupResult(result));
+        return;
+      }
+
+      printJson(result);
     });
 
   program

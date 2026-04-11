@@ -85,7 +85,7 @@ describe("actor registry loader", () => {
         james     cartesia    sonic-3           calm_british_male
         mina      elevenlabs  eleven_v3         ZJCNdZEjYwkOElxugmW2
         narrator  openai      gpt-4o-mini-tts   alloy
-        sujin     typecast    latest            actor_24_letters
+        sujin     typecast    ssfm-v30          tc_60e5426de8b95f1d3000d7b5
         sunhi     edge-tts    edge-readaloud    ko-KR-SunHiNeural"
     `);
     expect(formatActorDetails(registry.actors.mina)).toMatchInlineSnapshot(`

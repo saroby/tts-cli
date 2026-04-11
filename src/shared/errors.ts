@@ -10,7 +10,8 @@ export type ErrorCode =
   | "PROVIDER_UNSUPPORTED"
   | "REGISTRY_NOT_FOUND"
   | "REGISTRY_PARSE_ERROR"
-  | "SCRIPT_PARSE_ERROR";
+  | "SCRIPT_PARSE_ERROR"
+  | "SETUP_FAILED";
 
 export class CliError extends Error {
   readonly exitCode: number;

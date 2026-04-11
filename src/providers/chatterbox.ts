@@ -13,6 +13,7 @@ import {
   mimeTypeForFormat,
   withTempFile,
 } from "./helpers.js";
+import { resolveChatterboxPython } from "./chatterbox-runtime.js";
 
 const execFileAsync = promisify(execFile);
 const CHATTERBOX_BRIDGE_PATH = fileURLToPath(
@@ -79,7 +80,7 @@ function prepareCommand(
 } {
   assertSupportedFormat(request.format);
 
-  const python = process.env.CHATTERBOX_PYTHON ?? "python3";
+  const python = resolveChatterboxPython();
   const providerOptions = request.actor.providerOptions;
   const args = [
     CHATTERBOX_BRIDGE_PATH,
@@ -135,6 +136,7 @@ function prepareCommand(
       command: [python, ...args],
       notes: [
         "Chatterbox requires Python plus chatterbox-tts runtime dependencies.",
+        "Run `tts setup chatterbox` to create the local Python runtime.",
       ],
     },
   };

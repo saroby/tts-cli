@@ -13,6 +13,7 @@ Actor-centric multi-provider TTS CLI.
 
 ```bash
 npm install
+npm run setup:chatterbox   # only if you want the Chatterbox provider
 npm run build
 npm run lint
 npm test
@@ -57,6 +58,20 @@ npx tsx src/cli/index.ts run scene.tts --out out/run
 - Typecast
 - Edge TTS
 - Chatterbox
+
+## Optional Runtime Setup
+
+Chatterbox needs a separate Python runtime with `torch`, `torchaudio`, and `chatterbox-tts`.
+
+```bash
+npm run setup:chatterbox
+```
+
+Preview the exact commands first:
+
+```bash
+node --import tsx src/cli/index.ts setup chatterbox --dry-run
+```
 
 ## Test Policy
 
