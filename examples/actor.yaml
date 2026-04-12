@@ -25,6 +25,36 @@ actors:
     voice: ko-KR-SunHiNeural
     locale: ko-KR
 
+  hyunsu:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: ko-KR-HyunsuMultilingualNeural
+    locale: ko-KR
+
+  injoon:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: ko-KR-InJoonNeural
+    locale: ko-KR
+
+  andrew:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: en-US-AndrewNeural
+    locale: en-US
+
+  aria:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: en-US-AriaNeural
+    locale: en-US
+
+  jenny:
+    provider: edge-tts
+    model: edge-readaloud
+    voice: en-US-JennyNeural
+    locale: en-US
+
   james:
     provider: cartesia
     model: sonic-3
