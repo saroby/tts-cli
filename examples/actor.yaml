@@ -62,3 +62,1390 @@ actors:
     locale: en-US
     synthesis:
       speed: 0.97
+
+  # Typecast ssfm-v30 (231 voices)
+  aaron:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67b6985d4d5d632d97478263
+    locale: ko-KR
+
+  ae_ran:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5d01a52c63338e00072b8c9f
+    locale: ko-KR
+
+  ael:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_676cda78bde49be9d17f38e0
+    locale: ko-KR
+
+  aiden:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61e7485c629d45e35622d1fc
+    locale: ko-KR
+
+  alena:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_689450bdcce4027c2f06eee8
+    locale: ko-KR
+
+  alex:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6271b9639382aa2d68e2d5c1
+    locale: ko-KR
+
+  ari:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6047863af12456064b35354e
+    locale: ko-KR
+
+  arin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67513c3cf30802da48949a14
+    locale: ko-KR
+
+  avery:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_659655839f7a5014fe74a76c
+    locale: ko-KR
+
+  avong:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61532c5aed9bfa8b54d5dff6
+    locale: ko-KR
+
+  bomi:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60915b5616d74069af8e8cab
+    locale: ko-KR
+
+  bora:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_618203f635ea62f8574c7d8a
+    locale: ko-KR
+
+  brad:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63e45daee48a09fcf2d45402
+    locale: ko-KR
+
+  callan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65bca7feace8a6fe13966252
+    locale: ko-KR
+
+  captain_bill:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6513e3e95ea8304ce7602956
+    locale: ko-KR
+
+  carl:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6777666645604e14c7ff8ee5
+    locale: ko-KR
+
+  carlos:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61b9a899a28a0b3f64b21d4f
+    locale: ko-KR
+
+  chad:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67c90d6244cf859417f2fff5
+    locale: ko-KR
+
+  chan_gu:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5c547544fcfee90007fed455
+    locale: ko-KR
+
+  charlotte:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63a3d9e24b235ddd6541a799
+    locale: ko-KR
+
+  chester:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_660e5c11eef728e75f95f520
+    locale: ko-KR
+
+  chloe:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66aca22c7d31e45ff05ff418
+    locale: ko-KR
+
+  claire:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_628d9c881374f768260298b0
+    locale: ko-KR
+
+  classic_narrator:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_603fa172a669dfd23f450abd
+    locale: ko-KR
+
+  cole:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63b66515af8bf60c80b87642
+    locale: ko-KR
+
+  cyrus:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62d66c463c017468ffbd53ed
+    locale: ko-KR
+
+  dahee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ebea251fcf5110007b77d0f
+    locale: ko-KR
+
+  dahyeon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_646f0dac2465b38f37787f64
+    locale: ko-KR
+
+  dan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_615c6abd9d9ddf11c620ad8e
+    locale: ko-KR
+
+  dana:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6335061c3c90cf9e5b6b9fff
+    locale: ko-KR
+
+  dasom:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6243fb7beec1a1bff3cfe6c4
+    locale: ko-KR
+
+  david:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60e5421475f558ee6473a00a
+    locale: ko-KR
+
+  dean:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_673eb45cdc1073aef51e6b90
+    locale: ko-KR
+
+  dohee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_644a05b537254553823492fb
+    locale: ko-KR
+
+  dohyun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66d000ee0742c43c93a0ada1
+    locale: ko-KR
+
+  dollar_jr:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61b007392f2010f2aa1a052a
+    locale: ko-KR
+
+  doughnut:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6075b407b8a5c6f36b877c88
+    locale: ko-KR
+
+  du5t:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60c8b9fcb1de2b377c6c2cb2
+    locale: ko-KR
+
+  dukgu:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_618203826672d21ebf37748e
+    locale: ko-KR
+
+  dylan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_672c5f5ce59fac2a48faeaee
+    locale: ko-KR
+
+  edward:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_625fb112fefc49af63d18127
+    locale: ko-KR
+
+  elias:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67db753311833db994c4fed7
+    locale: ko-KR
+
+  eman:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_644a0a57228dab7c49bfdd25
+    locale: ko-KR
+
+  eunbin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_660e45ff50e0ecacaf967d22
+    locale: ko-KR
+
+  eunsol:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67db72eb93add6902ea41e5c
+    locale: ko-KR
+
+  frankenstein:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_634f8ecab302fd064cd4c20f
+    locale: ko-KR
+
+  gaeul:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60f7a217279ffba711ce2958
+    locale: ko-KR
+
+  george:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60d1f8de6eff8301c397014a
+    locale: ko-KR
+
+  geunseok:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_663c68c34652f4195ddea850
+    locale: ko-KR
+
+  geunwoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_64b8fa538a31659e5e19db28
+    locale: ko-KR
+
+  gowoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_68785db8ba9cd7503f27d921
+    locale: ko-KR
+
+  graham:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63aaebfaf95b9c23b311c88d
+    locale: ko-KR
+
+  gunwoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_624cccbcadcd568510764d65
+    locale: ko-KR
+
+  gus:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67bfc79c0fdd0f534e9567b1
+    locale: ko-KR
+
+  haerang:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6788847e9939d48aeb8642d2
+    locale: ko-KR
+
+  hailey:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_677f3763b5a012d3b3b3e85e
+    locale: ko-KR
+
+  hangyeol:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_677f2aa4a854ddffa0ebda89
+    locale: ko-KR
+
+  hanjun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_618b1849ef7827cfea34ea1e
+    locale: ko-KR
+
+  hans:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_624ccc5a6ac2f03235ce042b
+    locale: ko-KR
+
+  hansol:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_661797923ed12f31b61c4b5f
+    locale: ko-KR
+
+  harin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6271b9b22b3bf7947c23e9bc
+    locale: ko-KR
+
+  heejoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6426f7d00e18c1c9fede42d0
+    locale: ko-KR
+
+  helena:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62203cf8a08b67aac4623e41
+    locale: ko-KR
+
+  hosik:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63c76c6a1c6413ff949de534
+    locale: ko-KR
+
+  hyelee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62e8f21e979b3860fe2f6a24
+    locale: ko-KR
+
+  hyemin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_667ce80314cb3a612d6959e8
+    locale: ko-KR
+
+  hyunji:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66d00104bda076835c38ba68
+    locale: ko-KR
+
+  hyunju:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6335062fd260d463f7d7abb9
+    locale: ko-KR
+
+  hyunkyung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ecbbc5599979700087711d6
+    locale: ko-KR
+
+  hyunmin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_627ae61ffdf53ef0bb6902cd
+    locale: ko-KR
+
+  hyunseung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_623145248d2f689cc9bad655
+    locale: ko-KR
+
+  igyeom:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67bfd35fda120cfcc76b9cb9
+    locale: ko-KR
+
+  ijun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_662a05b17419f60500ac5630
+    locale: ko-KR
+
+  ina:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62686be9deec4c1bb7fd077c
+    locale: ko-KR
+
+  inseong:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_618b18b0d3fbf96c644dbc0d
+    locale: ko-KR
+
+  instructor_han:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5faa3acfac283a00075d0d2e
+    locale: ko-KR
+
+  jack:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60e5426de8b95f1d3000d7b5
+    locale: ko-KR
+
+  jack_o_lantern:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_634f8ed3165554e4256eedac
+    locale: ko-KR
+
+  jaejun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_653220349ba8419521ae8a63
+    locale: ko-KR
+
+  jaeyi:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_612ed01c7eb720fddd3ddedf
+    locale: ko-KR
+
+  jain:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6809c111e5e8c73f8a0237b2
+    locale: ko-KR
+
+  jake:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_643797da6738883e188505b7
+    locale: ko-KR
+
+  jeff:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67512e5af2b6dbabce63f92a
+    locale: ko-KR
+
+  jenna:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_641c10bfb62ae5eee6db3f9e
+    locale: ko-KR
+
+  jeong_choi:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63e4665444a08572e32da6e1
+    locale: ko-KR
+
+  jewby:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ebea194728f5b00075e61e8
+    locale: ko-KR
+
+  jian:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_615c6a4e369566b08b8a7a71
+    locale: ko-KR
+
+  jihee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60a3c91b4bc87f0d62b09a50
+    locale: ko-KR
+
+  jihoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61f0859907085fc68561c9a1
+    locale: ko-KR
+
+  jihyun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65f280ecf1a9fb325938fdf9
+    locale: ko-KR
+
+  jimmy:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_603fa0459441d42bc362eadf
+    locale: ko-KR
+
+  jin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63be4f4f564199aab7aad258
+    locale: ko-KR
+
+  jinhan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_673ecaa071c8f61f01459243
+    locale: ko-KR
+
+  jinhee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6731b2b2478a48710ecc9158
+    locale: ko-KR
+
+  jinhyuk:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5c3c52ca5827e00008dd7f36
+    locale: ko-KR
+
+  jinseo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65bb3a1976b69213594357fc
+    locale: ko-KR
+
+  jinwoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_632293f759d649937b97f323
+    locale: ko-KR
+
+  jiyoung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5c789c34dabcfa0008b0a390
+    locale: ko-KR
+
+  jolly:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6386d6aceb3125e51e3234e8
+    locale: ko-KR
+
+  jooeun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63b6650cd4db9f9f9bc4ad84
+    locale: ko-KR
+
+  joshua:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62baac399b316e5fec036a26
+    locale: ko-KR
+
+  juha:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5d01a52563338e00072b8c9c
+    locale: ko-KR
+
+  juho:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_658d1bea67f8ac8fa3cbbef9
+    locale: ko-KR
+
+  junghee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ebea1a364afaf00087fc2fb
+    locale: ko-KR
+
+  jungseok:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66860d30b8d89a792aa89a51
+    locale: ko-KR
+
+  junsang:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ecbbc7399979700087711db
+    locale: ko-KR
+
+  junseong:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66e26710ac44cf7c7ebfdb71
+    locale: ko-KR
+
+  justin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_633d530f093ca33db95de02b
+    locale: ko-KR
+
+  juyoung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66f4ecb5b1a24ceec9f6ccf0
+    locale: ko-KR
+
+  kangil:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_68d4b115f0486108a7eefb37
+    locale: ko-KR
+
+  kanno:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67d237f1782cabcc6155272f
+    locale: ko-KR
+
+  katie:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61de29b665ffbaa1cbe5ca23
+    locale: ko-KR
+
+  kelly:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_627ae5cd14dc32608fdaffa8
+    locale: ko-KR
+
+  kevin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61095f50876293488937d5db
+    locale: ko-KR
+
+  keybo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6100287f568d6198a78bac31
+    locale: ko-KR
+
+  kiseob:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62a89759695ad26f7fb514d0
+    locale: ko-KR
+
+  klip_kim:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_64004d0d38436e7e4f15b2d4
+    locale: ko-KR
+
+  koombo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6426f7dc0084e83b73bf625a
+    locale: ko-KR
+
+  kristen:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_662a15c1e31aab9a774b3b31
+    locale: ko-KR
+
+  kukhee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5c789c31dabcfa0008b0a38c
+    locale: ko-KR
+
+  kyungsook:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ebea266728f5b00075e6215
+    locale: ko-KR
+
+  lady_cho:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_602bd483b1837361b08c1ab6
+    locale: ko-KR
+
+  lamie:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60194446adfd1fbe5e0dd975
+    locale: ko-KR
+
+  landon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6633457fb5267dbd4808a2dd
+    locale: ko-KR
+
+  leo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62fb678f9b93d9207fa8c032
+    locale: ko-KR
+
+  lindsay:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_632a759503f3cb7b9c8a717b
+    locale: ko-KR
+
+  liz:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_639ad2972cce84809db3cfd3
+    locale: ko-KR
+
+  lloyd:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65681f21097fc4326ceb5e21
+    locale: ko-KR
+
+  logan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6791c4a4c79515dea68b4a75
+    locale: ko-KR
+
+  mbti_et_f:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_631725654e0d806f7158efd1
+    locale: ko-KR
+
+  mbti_et_m:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6317255ba96fad352c4aebc8
+    locale: ko-KR
+
+  mbti_it_m:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_630ddadd236247454361ea05
+    locale: ko-KR
+
+  michael:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61b9a7e8a820ec151ae3c7f9
+    locale: ko-KR
+
+  mija:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6059db64e2d12a32cce1b0c7
+    locale: ko-KR
+
+  mijin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63745dd5e0b6db6f3cf10924
+    locale: ko-KR
+
+  mikyung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_633d52c5febcba27f45eced7
+    locale: ko-KR
+
+  minchae:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66b4523f259dc43de649c1d1
+    locale: ko-KR
+
+  minji:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5eb55ce920d1b60016e91de6
+    locale: ko-KR
+
+  minjoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_643fa086abd682c4af98e853
+    locale: ko-KR
+
+  minjung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6699eb0f10b8e361d6a9aba1
+    locale: ko-KR
+
+  mio:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5c3c52caea9791000747155c
+    locale: ko-KR
+
+  miran_choi:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65e02cf60c83f6b4209f4343
+    locale: ko-KR
+
+  mister_gop:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62031fd83afcc3bfff06883d
+    locale: ko-KR
+
+  moonjung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_68f9c6a72f0f04a417bb136f
+    locale: ko-KR
+
+  mooyeol:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_648aaee9248bcd37dad435e6
+    locale: ko-KR
+
+  morgan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6256118ea1103af69f0a87ec
+    locale: ko-KR
+
+  munsu:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66459a0194fba52219ade717
+    locale: ko-KR
+
+  myungjoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_656059fc4db338e38f77d0bc
+    locale: ko-KR
+
+  naeun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_662a05cf14d4a303e5d0baa2
+    locale: ko-KR
+
+  nathan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_640997e4bb4c0b074eef945b
+    locale: ko-KR
+
+  neel:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63d3770f4d2e3367877bab36
+    locale: ko-KR
+
+  neoguard:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6271b909bc73a0f7591f147c
+    locale: ko-KR
+
+  noa:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62031f1abb4297c1b176eb21
+    locale: ko-KR
+
+  noel:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_638efbb7fac82cf52330aa49
+    locale: ko-KR
+
+  oliver:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_675932accd1349e1c9aa0c3f
+    locale: ko-KR
+
+  oscar:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6229652aa4ff5d1ee6bf4e5f
+    locale: ko-KR
+
+  owen:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62e8f1e86627e27dcffd8884
+    locale: ko-KR
+
+  p_0150n:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62849c6d4b8771d984837ff6
+    locale: ko-KR
+
+  patricia:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_660e5c29eef728e75f95f538
+    locale: ko-KR
+
+  pyeonghwa:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_64d5cd4c35618dd3797c20ed
+    locale: ko-KR
+
+  rayeon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_68413e12459cfdf27b481183
+    locale: ko-KR
+
+  reporter_kang:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5e4f7a5da82e1f000aca31af
+    locale: ko-KR
+
+  rex:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6322940059d649937b97f326
+    locale: ko-KR
+
+  risan_ji:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65e02cd537dfdac4257ca957
+    locale: ko-KR
+
+  romi:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61377f7ca4d286537b5aba6c
+    locale: ko-KR
+
+  ron:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6620ee223bc61e2f6b79fdb5
+    locale: ko-KR
+
+  royce:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65cb142996cc219854a14065
+    locale: ko-KR
+
+  ryan:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61d55adfd6c33fa5f66cb067
+    locale: ko-KR
+
+  salty_chan_gu:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6010088f885570093ad24d53
+    locale: ko-KR
+
+  sanghoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_636b1d93b58379d5c6b6aef7
+    locale: ko-KR
+
+  santa:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61a6c0031649b652166c4f38
+    locale: ko-KR
+
+  santa_claus:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6386d6bf146d8da2a87ae54d
+    locale: ko-KR
+
+  santa_reporter:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5fcf92faf3a7f2000799cc0c
+    locale: ko-KR
+
+  sean:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6304945aa2fc5265848f300e
+    locale: ko-KR
+
+  sehee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_611c3f692fac944dff493a04
+    locale: ko-KR
+
+  seheon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_68662745779b66ba84fc4d84
+    locale: ko-KR
+
+  sena:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_622964d6255364be41659078
+    locale: ko-KR
+
+  seohee:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66d91cac31a58a718f750a49
+    locale: ko-KR
+
+  seojin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_68537c9420b646f2176890ba
+    locale: ko-KR
+
+  seojoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63aaec04428dd87af3757d72
+    locale: ko-KR
+
+  seokpil:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61250b6622f4f8c50236dc71
+    locale: ko-KR
+
+  seolhwa:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6731b307df12333201d12b94
+    locale: ko-KR
+
+  seonha:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_649408f268febb61286eec85
+    locale: ko-KR
+
+  seoyeon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_637cbfeef7f00f21e8a1c6c8
+    locale: ko-KR
+
+  seungheon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61e7494d3cded5adfeab25b6
+    locale: ko-KR
+
+  seungyeon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_63622aa127f06f51e93a873c
+    locale: ko-KR
+
+  shinhe:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ecbbc4b0fbab10007bb3c7d
+    locale: ko-KR
+
+  shinwook:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6465b87a4ee2060b333caf80
+    locale: ko-KR
+
+  simon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65b34b05b3fb844f3d6b7aab
+    locale: ko-KR
+
+  sindarin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61095ebc03c0e5b98f8ba69c
+    locale: ko-KR
+
+  sio:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6673af2eb00e2565e6811c71
+    locale: ko-KR
+
+  siwoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6699eb3849dfac016c29444c
+    locale: ko-KR
+
+  siyeon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6568164fe05ddffee8b0e271
+    locale: ko-KR
+
+  skylar:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67512e8b0b5984173fa04685
+    locale: ko-KR
+
+  slushy:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61a6c1b345116a3825caf1cd
+    locale: ko-KR
+
+  sojin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_666a9871abcf27a5169850d0
+    locale: ko-KR
+
+  sophia:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6296a8797f24a46b8273606d
+    locale: ko-KR
+
+  soye:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6837dec48fc46637a9272b88
+    locale: ko-KR
+
+  sportscaster_kang:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62849ce44b8771d984838066
+    locale: ko-KR
+
+  sportscaster_tony:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60228e8775ecc9e7ab8ef334
+    locale: ko-KR
+
+  suji:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62686cc30e70d8c6b0d9b010
+    locale: ko-KR
+
+  sumin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66e266f9c568136dce8164e5
+    locale: ko-KR
+
+  sungbae:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5d01a52bbb04140008a23f37
+    locale: ko-KR
+
+  sunggyu:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5ecbbc6099979700087711d8
+    locale: ko-KR
+
+  sungjun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6050bb4a630c0d0906e65d5d
+    locale: ko-KR
+
+  sungwook:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5d01a52b63338e00072b8c9e
+    locale: ko-KR
+
+  suyoon:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6763bef751dc3fb17792acaf
+    locale: ko-KR
+
+  taebaek:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_606c6c155e38f609c6789d2b
+    locale: ko-KR
+
+  taesub:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62f223abb9d09c5b3131c7f2
+    locale: ko-KR
+
+  tim:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_62ce546661d31a90a0f786d0
+    locale: ko-KR
+
+  tina:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6347828cd3835443f0fcd572
+    locale: ko-KR
+
+  tommy:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6088209815f2f9881e08e815
+    locale: ko-KR
+
+  uncle_hank:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_602bd4fa8cfef478f1ceef0d
+    locale: ko-KR
+
+  vanessa:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61377f18a4d286537b5aba26
+    locale: ko-KR
+
+  vivien:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_615c6b331b008225e4d0fbe3
+    locale: ko-KR
+
+  wade:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_685ca2dcfa58f44bdbe60d65
+    locale: ko-KR
+
+  walter:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_6837b58f80ceeb17115bb771
+    locale: ko-KR
+
+  west:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_632a757ae7c78a412f5a36c0
+    locale: ko-KR
+
+  wonho:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66bf0dadd3f21fab24da6708
+    locale: ko-KR
+
+  wonkyung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_675a74035ff33c1eeff6255f
+    locale: ko-KR
+
+  wonwoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_686dc43ebd6351e06ee64d74
+    locale: ko-KR
+
+  woosung:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_668f4f533ea5c6ce5e43fd48
+    locale: ko-KR
+
+  xavier:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_60915a63276a6a7600d7acfa
+    locale: ko-KR
+
+  yeeun:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_65f280c8bca6a9dc5c12c348
+    locale: ko-KR
+
+  yejin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67c90ad544cf859417f2fc3a
+    locale: ko-KR
+
+  yelin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_611c406d9540d10d3002e03a
+    locale: ko-KR
+
+  yena:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_61e748d0fd9fb2d2cacbb04d
+    locale: ko-KR
+
+  yeonwoo:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_5eb55cf1f0b0a700071f89c7
+    locale: ko-KR
+
+  yeseul:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_66ab0e26ec23f325b7ad51df
+    locale: ko-KR
+
+  yujin:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_64818767272f62f8ddb73948
+    locale: ko-KR
+
+  zoey:
+    provider: typecast
+    model: ssfm-v30
+    voice: tc_67d238428572120c4aa644cc
+    locale: ko-KR
