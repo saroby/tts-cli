@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 
+import { createRequire } from "node:module";
 import { Command } from "commander";
+
+const require = createRequire(import.meta.url);
+const { version } = require("../../package.json") as { version: string };
 
 import { formatActorDetails, formatActorList, formatChatterboxSetupResult, formatRunManifest, formatRunSummary, formatSayPreview, formatSayResult } from "./format.js";
 import { getActorOrThrow, loadActorRegistry } from "../domain/actor/loader.js";
@@ -56,6 +60,7 @@ function buildProgram(): Command {
   program
     .name("tts")
     .description("Actor-centric multi-provider TTS CLI")
+    .version(version)
     .option("--verbose", "Include stack traces in error output")
     .showHelpAfterError();
 
