@@ -10,7 +10,6 @@ import { formatActorDetails, formatActorList, formatChatterboxSetupResult, forma
 import { getActorOrThrow, loadActorRegistry } from "../domain/actor/loader.js";
 import { isActorHidden, saveActorStates, setActorHiddenState } from "../domain/actor/state.js";
 import { parseScript, parseScriptFile } from "../domain/script/parser.js";
-import type { ParsedScript } from "../domain/script/types.js";
 import { dryRunSay, dryRunScript, executeSay, executeScript, prepareSpeech } from "../core/tts.js";
 import { ensureChatterboxRuntime } from "../providers/chatterbox-runtime.js";
 import { CliError } from "../shared/errors.js";

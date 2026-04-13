@@ -101,6 +101,27 @@ tts say \
 - actor가 ElevenLabs면 ElevenLabs 문법을 대사 안에 직접 쓸 수 있다.
 - CLI는 이 문자열을 별도 문법으로 해석하지 않는다.
 
+## 4.5. 무음 제거
+
+합성된 오디오의 앞뒤 무음을 잘라낸다. FFmpeg가 설치되어 있어야 한다.
+
+```bash
+tts say \
+  --actor mina \
+  --text "안녕하세요." \
+  --out out/mina.mp3 \
+  --trim-silence
+```
+
+`run`에서도 동일하게 쓸 수 있다.
+
+```bash
+tts run \
+  examples/demo.tts \
+  --out out/demo \
+  --trim-silence
+```
+
 ## 5. 파일 실행
 
 ```bash
