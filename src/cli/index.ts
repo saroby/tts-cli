@@ -9,7 +9,8 @@ const { version } = require("../../package.json") as { version: string };
 import { formatActorDetails, formatActorList, formatChatterboxSetupResult, formatRunManifest, formatRunSummary, formatSayPreview, formatSayResult } from "./format.js";
 import { getActorOrThrow, loadActorRegistry } from "../domain/actor/loader.js";
 import { isActorHidden, saveActorStates, setActorHiddenState } from "../domain/actor/state.js";
-import { parseScriptFile } from "../domain/script/parser.js";
+import { parseScript, parseScriptFile } from "../domain/script/parser.js";
+import type { ParsedScript } from "../domain/script/types.js";
 import { dryRunSay, dryRunScript, executeSay, executeScript, prepareSpeech } from "../core/tts.js";
 import { ensureChatterboxRuntime } from "../providers/chatterbox-runtime.js";
 import { CliError } from "../shared/errors.js";
@@ -232,8 +233,8 @@ function buildProgram(): Command {
 
   program
     .command("run")
-    .description("Run a .tts script")
-    .argument("<script>", "Path to .tts file")
+    .description("Run a .tts script (use - to read from stdin)")
+    .argument("[script]", "Path to .tts file (reads stdin if omitted or -)")
     .option("--actor-file <path>", "Use a specific actor registry file")
     .option("--out <dir>", "Output directory")
     .option("--dry-run", "Preview provider payloads without synthesis")
@@ -246,15 +247,21 @@ function buildProgram(): Command {
       }
       return n;
     })
-    .action(async (scriptPath: string, options: RunCommandOptions) => {
-      const registry = await loadActorRegistry({ actorFile: options.actorFile });
-      const parsedScript = await parseScriptFile(scriptPath);
+    .action(async (scriptPath: string | undefined, options: RunCommandOptions) => {
+      const scriptPromise = (scriptPath && scriptPath !== "-")
+        ? parseScriptFile(scriptPath).then(parsed => ({ parsed, label: scriptPath }))
+        : readStdin().then(text => ({ parsed: parseScript(text, undefined), label: "<stdin>" }));
+
+      const [registry, { parsed: parsedScript, label: sourceLabel }] = await Promise.all([
+        loadActorRegistry({ actorFile: options.actorFile }),
+        scriptPromise,
+      ]);
 
       if (options.dryRun) {
         const manifest = await dryRunScript(parsedScript, registry, {
           outDir: options.out,
           format: options.format,
-          sourceLabel: scriptPath,
+          sourceLabel,
         });
         if (options.pretty) {
           console.log(formatRunManifest(manifest));
@@ -268,7 +275,7 @@ function buildProgram(): Command {
       const result = await executeScript(parsedScript, registry, {
         outDir: options.out,
         format: options.format,
-        sourceLabel: scriptPath,
+        sourceLabel,
         concurrency: options.concurrency,
       });
 
