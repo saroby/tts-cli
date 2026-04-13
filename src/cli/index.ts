@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { Command } from "commander";
+
+if (existsSync(".env")) {
+  process.loadEnvFile(".env");
+}
 
 const require = createRequire(import.meta.url);
 const { version } = require("../../package.json") as { version: string };
@@ -12,6 +17,10 @@ import { isActorHidden, saveActorStates, setActorHiddenState } from "../domain/a
 import { parseScript, parseScriptFile } from "../domain/script/parser.js";
 import { dryRunSay, dryRunScript, executeSay, executeScript, prepareSpeech } from "../core/tts.js";
 import { ensureChatterboxRuntime } from "../providers/chatterbox-runtime.js";
+import { assertPreviewPlaybackSupported, playAudio } from "../core/playback.js";
+import { getProviderAdapter } from "../providers/index.js";
+import { normalizeOutputFormat } from "../providers/helpers.js";
+import { interactivePicker } from "./interactive-picker.js";
 import { CliError } from "../shared/errors.js";
 import type { ActorCatalogState, ResolvedActor } from "../domain/actor/types.js";
 
@@ -48,6 +57,13 @@ interface ActorListOptions extends RegistryOptions, PrettyOption {
 
 interface ActorHideOptions extends RegistryOptions {
   reason?: string;
+}
+
+interface ActorPreviewOptions extends RegistryOptions, PrettyOption {
+  interactive?: boolean;
+  text?: string;
+  all?: boolean;
+  format?: string;
 }
 
 interface SetupCommandOptions extends PrettyOption {
@@ -163,6 +179,88 @@ function buildProgram(): Command {
       const actorStates = setActorHiddenState(registry.actorStates, actor.name, false);
       await saveActorStates(registry.actorStatePath, actorStates);
       printJson({ name: actor.name, hidden: false });
+    });
+
+  actorCommand
+    .command("preview")
+    .description("Preview an actor's voice")
+    .argument("[name]", "Actor name (required unless --interactive)")
+    .option("--interactive", "Browse and preview actors interactively")
+    .option("--text <text>", "Sample text to speak", "안녕하세요, 음성 미리듣기입니다.")
+    .option("--all", "Include hidden actors in interactive mode")
+    .option("--actor-file <path>", "Use a specific actor registry file")
+    .option("--actor-state-file <path>", "Use a specific actor state file")
+    .option("--format <format>", "Override output format")
+    .option("--pretty", "Human-readable output instead of JSON")
+    .action(async (name: string | undefined, options: ActorPreviewOptions) => {
+      const registry = await loadActorRegistry({
+        actorFile: options.actorFile,
+        actorStateFile: options.actorStateFile,
+        includeActorState: true,
+      });
+
+      const sampleText = options.text!;
+
+      async function synthesizeAndPlay(actor: ResolvedActor): Promise<void> {
+        const format = normalizeOutputFormat(options.format ?? actor.synthesis?.format);
+        assertPreviewPlaybackSupported(format);
+        const adapter = getProviderAdapter(actor.provider);
+        const result = await adapter.synthesize({ actor, text: sampleText, format });
+        await playAudio(result.audio, result.format);
+      }
+
+      if (options.interactive) {
+        if (!process.stdin.isTTY || (!process.stderr.isTTY && !process.stdout.isTTY)) {
+          throw new CliError(
+            "--interactive requires a TTY input and output stream.",
+            1,
+            { code: "INVALID_ARGUMENT" },
+          );
+        }
+
+        const actors = Object.values(registry.actors)
+          .filter((actor) => options.all || !isActorHidden(registry.actorStates, actor.name))
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        const result = await interactivePicker(actors, {
+          onPreview: synthesizeAndPlay,
+        });
+
+        if (result.type === "selected") {
+          if (options.pretty) {
+            console.log(formatActorDetails(result.actor, registry.actorStates[result.actor.name]));
+          } else {
+            printJson(actorToJson(result.actor, registry.actorStates[result.actor.name]));
+          }
+        }
+        return;
+      }
+
+      if (!name) {
+        throw new CliError(
+          "Actor name is required. Use --interactive to browse actors.",
+          1,
+          { code: "MISSING_INPUT" },
+        );
+      }
+
+      const actor = getActorOrThrow(registry, name);
+      try {
+        await synthesizeAndPlay(actor);
+      } catch (err) {
+        if (err instanceof CliError) throw err;
+        throw new CliError(
+          `Playback failed for ${actor.name}: ${err instanceof Error ? err.message : String(err)}`,
+          1,
+          { code: "PLAYBACK_FAILED" },
+        );
+      }
+
+      if (options.pretty) {
+        console.log(formatActorDetails(actor, registry.actorStates[actor.name]));
+      } else {
+        printJson(actorToJson(actor, registry.actorStates[actor.name]));
+      }
     });
 
   program
