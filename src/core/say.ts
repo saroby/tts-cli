@@ -6,6 +6,7 @@ import { getActorOrThrow } from "../domain/actor/loader.js";
 import { getProviderAdapter } from "../providers/index.js";
 import { normalizeOutputFormat } from "../providers/helpers.js";
 import { ensureParentDirectory } from "../shared/fs.js";
+import { trimSilence } from "./trim.js";
 import type { PreparedSpeech, SayExecutionResult, SayPreview, SpeechOverrides } from "./types.js";
 
 export function prepareSpeech(
@@ -43,13 +44,18 @@ export async function dryRunSay(prepared: PreparedSpeech): Promise<SayPreview> {
 export async function executeSay(
   prepared: PreparedSpeech,
   outPath: string,
+  options?: { trimSilence?: boolean },
 ): Promise<SayExecutionResult> {
   const adapter = getProviderAdapter(prepared.actor.provider);
   const result = await adapter.synthesize(prepared);
   const filePath = resolve(outPath);
 
+  const audio = options?.trimSilence
+    ? await trimSilence(result.audio, result.format)
+    : result.audio;
+
   await ensureParentDirectory(filePath);
-  await writeFile(filePath, result.audio);
+  await writeFile(filePath, audio);
 
   return {
     actor: prepared.actor.name,

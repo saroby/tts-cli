@@ -48,6 +48,7 @@ export interface RunExecutionResult {
 export interface SpeechOverrides {
   voice?: string;
   format?: string;
+  trimSilence?: boolean;
 }
 
 export interface RunOptions {
@@ -55,4 +56,5 @@ export interface RunOptions {
   format?: string;
   sourceLabel?: string;
   concurrency?: number;
+  trimSilence?: boolean;
 }

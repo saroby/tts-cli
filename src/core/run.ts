@@ -83,7 +83,9 @@ export async function executeScript(
           format: options.format,
         });
         fileName = buildOutputFileName(index, prepared.actor.name, prepared.format);
-        await executeSay(prepared, resolve(stagingDir, fileName));
+        await executeSay(prepared, resolve(stagingDir, fileName), {
+          trimSilence: options.trimSilence,
+        });
         items[offset] = {
           index,
           actor: prepared.actor.name,

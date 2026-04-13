@@ -32,6 +32,7 @@ interface SayCommandOptions extends RegistryOptions, PrettyOption {
   dryRun?: boolean;
   voice?: string;
   format?: string;
+  trimSilence?: boolean;
 }
 
 interface RunCommandOptions extends RegistryOptions, PrettyOption {
@@ -39,6 +40,7 @@ interface RunCommandOptions extends RegistryOptions, PrettyOption {
   dryRun?: boolean;
   format?: string;
   concurrency?: number;
+  trimSilence?: boolean;
 }
 
 interface ActorListOptions extends RegistryOptions, PrettyOption {
@@ -199,6 +201,7 @@ function buildProgram(): Command {
     .option("--pretty", "Human-readable output instead of JSON")
     .option("--voice <voice>", "Temporarily override the actor voice")
     .option("--format <format>", "Override output format")
+    .option("--trim-silence", "Trim leading/trailing silence using FFmpeg")
     .action(async (options: SayCommandOptions) => {
       const text = options.text ?? await readStdin();
       const registry = await loadActorRegistry({ actorFile: options.actorFile });
@@ -222,7 +225,9 @@ function buildProgram(): Command {
         throw new CliError("`tts say` requires --out unless --dry-run is used.", 1, { code: "MISSING_OUTPUT" });
       }
 
-      const result = await executeSay(prepared, options.out);
+      const result = await executeSay(prepared, options.out, {
+        trimSilence: options.trimSilence,
+      });
       if (options.pretty) {
         console.log(formatSayResult(result));
         return;
@@ -240,6 +245,7 @@ function buildProgram(): Command {
     .option("--dry-run", "Preview provider payloads without synthesis")
     .option("--pretty", "Human-readable output instead of JSON")
     .option("--format <format>", "Override output format")
+    .option("--trim-silence", "Trim leading/trailing silence using FFmpeg")
     .option("--concurrency <n>", "Number of parallel synthesis requests", (v: string) => {
       const n = parseInt(v, 10);
       if (!Number.isInteger(n) || n < 1) {
@@ -277,6 +283,7 @@ function buildProgram(): Command {
         format: options.format,
         sourceLabel,
         concurrency: options.concurrency,
+        trimSilence: options.trimSilence,
       });
 
       if (options.pretty) {
