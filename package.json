@@ -1,6 +1,6 @@
 {
   "name": "@saroby/tts-cli",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Actor-centric multi-provider TTS CLI",
   "type": "module",
   "publishConfig": {
