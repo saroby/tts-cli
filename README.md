@@ -65,6 +65,39 @@ npx tsx src/cli/index.ts run scene.tts --out out/run
 - Edge TTS
 - Chatterbox
 
+## Long-text chunking
+
+긴 대사가 provider hard limit (ElevenLabs 5000자, OpenAI 4096자 등)을 넘으면 자동으로 문장 경계에서 청크 분할 후 ffmpeg `acrossfade`로 이어 붙여 단일 파일을 만든다.
+
+- 청킹 가능 provider: OpenAI, ElevenLabs, Cartesia, Typecast (각자 hard limit과 권장 soft target을 자체 선언).
+- 청킹 우회: Edge TTS (스트리밍), Chatterbox (로컬).
+- ElevenLabs / Typecast는 청크별 `previous_text` / `next_text`를 자동 주입해 prosody 연속성을 유지한다.
+- ElevenLabs 본문의 `(whispers)` 같은 paren tag와 `[laugh]` 같은 bracket tag는 청크 경계에서 절대 분할되지 않는다.
+- `pcm` / `mulaw` 같은 container-less 포맷은 청킹 대상이 아니다 (명확한 에러).
+
+CLI 플래그:
+
+```bash
+tts say --actor mina --text "<long text>" --out out.mp3 \
+  --max-chunk-chars 2000 --crossfade-ms 80 --chunk-concurrency 1
+```
+
+actor.yaml에서 actor별로 고정할 수도 있다:
+
+```yaml
+actors:
+  mina:
+    provider: elevenlabs
+    model: eleven_v3
+    voice: ZJCNdZEjYwkOElxugmW2
+    synthesis:
+      max_chunk_chars: 2000
+      crossfade_ms: 80
+      chunk_concurrency: 1
+```
+
+dry-run 시 텍스트가 청킹되면 응답 JSON에 `chunking` 메타와 `chunks` 배열(청크별 request preview)이 추가된다. 짧은 텍스트면 두 필드는 생략되어 기존 응답과 호환된다.
+
 ## Optional Runtime Setup
 
 Chatterbox needs a separate Python runtime with `torch`, `torchaudio`, and `chatterbox-tts`.

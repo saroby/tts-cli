@@ -8,12 +8,20 @@ import {
   localeToIso6393,
   mimeTypeForFormat,
   numberToPercentScale,
+  resolveChunkText,
 } from "./helpers.js";
 
 const TYPECAST_BASE_URL = "https://api.typecast.ai";
 
+const TYPECAST_CHUNKABLE_FORMATS: ReadonlySet<string> = new Set(["mp3", "wav"]);
+
 export const typecastAdapter: ProviderAdapter = {
   name: "typecast",
+  capabilities: {
+    textLimit: { hardMaxChars: 3000, defaultSoftTarget: 1500 },
+    context: { previousNextText: true },
+    chunkableFormats: TYPECAST_CHUNKABLE_FORMATS,
+  },
 
   async dryRun(request) {
     const prepared = prepareRequest(request);
@@ -113,8 +121,8 @@ function buildPrompt(
     "emotion_intensity",
     "emotionIntensity",
   ]);
-  const previousText = getStringOption(providerOptions, ["previous_text", "previousText"]);
-  const nextText = getStringOption(providerOptions, ["next_text", "nextText"]);
+  const previousText = resolveChunkText(request.context?.chunk, "previousText", providerOptions, ["previous_text", "previousText"]);
+  const nextText = resolveChunkText(request.context?.chunk, "nextText", providerOptions, ["next_text", "nextText"]);
   const prompt: Record<string, unknown> = {};
   // emotion_type auto-inference is only defined for ssfm-v30; update this when new models are added
   const isV30Model = request.actor.model === "ssfm-v30";

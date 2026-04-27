@@ -39,6 +39,9 @@ export interface SynthesisOptions {
   pitch?: number;
   volume?: number;
   format?: string;
+  maxChunkChars?: number;
+  crossfadeMs?: number;
+  chunkConcurrency?: number;
 }
 
 export interface LoadedActorRegistry {

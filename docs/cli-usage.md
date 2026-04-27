@@ -122,6 +122,37 @@ tts run \
   --trim-silence
 ```
 
+## 4.6. 긴 대사 청킹 + crossfade
+
+ElevenLabs 5000자, OpenAI 4096자 같은 hard limit을 넘기는 대사는 자동으로 문장 경계에서 분할되어 ffmpeg `acrossfade`로 이어진다. 결과는 항상 단일 파일이다.
+
+```bash
+tts say \
+  --actor mina \
+  --text "$(cat long-monologue.txt)" \
+  --out out/monologue.mp3 \
+  --max-chunk-chars 2000 \
+  --crossfade-ms 80
+```
+
+옵션:
+- `--max-chunk-chars` — 청크당 권장 글자 수. 미지정이면 actor.synthesis.max_chunk_chars 또는 provider별 기본값.
+- `--crossfade-ms` — 청크 사이 crossfade 길이 (0–200ms, 기본 50ms).
+- `--chunk-concurrency` — 한 say 안에서 청크를 병렬 합성할 개수 (기본 1, rate-limit 안전).
+
+원칙:
+- speech 본문의 `(whispers)` / `[laugh]` 같은 tag는 청크 경계에서 절대 분할되지 않는다.
+- ElevenLabs / Typecast는 청크별 `previous_text` / `next_text`가 자동 주입된다.
+- Edge TTS와 Chatterbox는 청킹 대상이 아니다 (각각 스트리밍, 로컬).
+- `pcm` / `mulaw` 같은 container-less 포맷은 청킹 시 명확한 에러로 거부.
+- `--trim-silence`는 합쳐진 단일 파일에 한 번만 적용된다.
+
+`run`도 동일 옵션을 받는다.
+
+```bash
+tts run examples/demo.tts --out out/demo --max-chunk-chars 2000
+```
+
 ## 5. 파일 실행
 
 ```bash
@@ -182,6 +213,25 @@ tts run \
   "actor": "mina",
   "provider": "elevenlabs",
   "text": "(whispers) Did you hear that?"
+}
+```
+
+긴 대사가 청킹되는 경우 dry-run 응답에 `chunking` 메타와 청크별 request preview가 추가된다 (짧은 대사는 두 필드 모두 생략).
+
+```json
+{
+  "actor": "mina",
+  "provider": "elevenlabs",
+  "chunking": {
+    "hardLimit": 5000,
+    "softTarget": 2000,
+    "chunkCount": 3,
+    "crossfadeMs": 50,
+    "concurrency": 1
+  },
+  "chunks": [
+    { "index": 0, "text": "...", "request": { "...": "..." } }
+  ]
 }
 ```
 

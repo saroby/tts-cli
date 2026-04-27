@@ -40,7 +40,7 @@ Use `--actor-file` only when a different registry source should be used.
 - YAML keys use `snake_case`. Loaded domain objects may use `camelCase`.
 - `--actor-file` replaces the auto-discovered registry. It does not merge files.
 - `locale`: BCP-47 language tag
-- `synthesis`: provider-agnostic defaults like `speed`, `pitch`, `volume`
+- `synthesis`: provider-agnostic defaults like `speed`, `pitch`, `volume`, `format`, `max_chunk_chars`, `crossfade_ms`, `chunk_concurrency`
 - `provider_options`: raw provider-specific escape hatch
 
 ## Credentials policy

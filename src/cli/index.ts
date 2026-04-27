@@ -23,6 +23,7 @@ import { normalizeOutputFormat } from "../providers/helpers.js";
 import { interactivePicker } from "./interactive-picker.js";
 import { CliError } from "../shared/errors.js";
 import type { ActorCatalogState, ResolvedActor } from "../domain/actor/types.js";
+import type { ChunkOverrides } from "../core/chunk-policy.js";
 
 interface RegistryOptions {
   actorFile?: string;
@@ -33,7 +34,9 @@ interface PrettyOption {
   pretty?: boolean;
 }
 
-interface SayCommandOptions extends RegistryOptions, PrettyOption {
+type ChunkCliOptions = ChunkOverrides;
+
+interface SayCommandOptions extends RegistryOptions, PrettyOption, ChunkCliOptions {
   actor: string;
   text?: string;
   out?: string;
@@ -43,7 +46,7 @@ interface SayCommandOptions extends RegistryOptions, PrettyOption {
   trimSilence?: boolean;
 }
 
-interface RunCommandOptions extends RegistryOptions, PrettyOption {
+interface RunCommandOptions extends RegistryOptions, PrettyOption, ChunkCliOptions {
   out?: string;
   dryRun?: boolean;
   format?: string;
@@ -299,16 +302,21 @@ function buildProgram(): Command {
     .option("--voice <voice>", "Temporarily override the actor voice")
     .option("--format <format>", "Override output format")
     .option("--trim-silence", "Trim leading/trailing silence using FFmpeg")
+    .option("--max-chunk-chars <n>", "Soft chunk size for long-text splitting", parsePositiveInt("--max-chunk-chars"))
+    .option("--crossfade-ms <n>", "Crossfade duration between chunks (0-200ms)", parseNonNegativeInt("--crossfade-ms"))
+    .option("--chunk-concurrency <n>", "Parallel chunk synthesis", parsePositiveInt("--chunk-concurrency"))
     .action(async (options: SayCommandOptions) => {
       const text = options.text ?? await readStdin();
       const registry = await loadActorRegistry({ actorFile: options.actorFile });
+      const chunkOverrides = pickChunkOverrides(options);
       const prepared = prepareSpeech(registry, options.actor, text, {
         voice: options.voice,
         format: options.format,
+        chunkOverrides,
       });
 
       if (options.dryRun) {
-        const preview = await dryRunSay(prepared);
+        const preview = await dryRunSay(prepared, chunkOverrides);
         if (options.pretty) {
           console.log(formatSayPreview(preview));
           return;
@@ -324,6 +332,7 @@ function buildProgram(): Command {
 
       const result = await executeSay(prepared, options.out, {
         trimSilence: options.trimSilence,
+        chunkOverrides,
       });
       if (options.pretty) {
         console.log(formatSayResult(result));
@@ -343,13 +352,10 @@ function buildProgram(): Command {
     .option("--pretty", "Human-readable output instead of JSON")
     .option("--format <format>", "Override output format")
     .option("--trim-silence", "Trim leading/trailing silence using FFmpeg")
-    .option("--concurrency <n>", "Number of parallel synthesis requests", (v: string) => {
-      const n = parseInt(v, 10);
-      if (!Number.isInteger(n) || n < 1) {
-        throw new CliError(`--concurrency must be a positive integer, got: ${v}`, 1, { code: "INVALID_ARGUMENT" });
-      }
-      return n;
-    })
+    .option("--concurrency <n>", "Number of parallel synthesis requests", parsePositiveInt("--concurrency"))
+    .option("--max-chunk-chars <n>", "Soft chunk size for long-text splitting", parsePositiveInt("--max-chunk-chars"))
+    .option("--crossfade-ms <n>", "Crossfade duration between chunks (0-200ms)", parseNonNegativeInt("--crossfade-ms"))
+    .option("--chunk-concurrency <n>", "Parallel chunk synthesis per speech node", parsePositiveInt("--chunk-concurrency"))
     .action(async (scriptPath: string | undefined, options: RunCommandOptions) => {
       const scriptPromise = (scriptPath && scriptPath !== "-")
         ? parseScriptFile(scriptPath).then(parsed => ({ parsed, label: scriptPath }))
@@ -360,11 +366,14 @@ function buildProgram(): Command {
         scriptPromise,
       ]);
 
+      const chunkOverrides = pickChunkOverrides(options);
+
       if (options.dryRun) {
         const manifest = await dryRunScript(parsedScript, registry, {
           outDir: options.out,
           format: options.format,
           sourceLabel,
+          chunkOverrides,
         });
         if (options.pretty) {
           console.log(formatRunManifest(manifest));
@@ -381,6 +390,7 @@ function buildProgram(): Command {
         sourceLabel,
         concurrency: options.concurrency,
         trimSilence: options.trimSilence,
+        chunkOverrides,
       });
 
       if (options.pretty) {
@@ -429,6 +439,42 @@ function actorToJson(
 
 function printJson(value: unknown): void {
   console.log(JSON.stringify(value));
+}
+
+function pickChunkOverrides(options: ChunkCliOptions): ChunkOverrides {
+  return {
+    maxChunkChars: options.maxChunkChars,
+    crossfadeMs: options.crossfadeMs,
+    chunkConcurrency: options.chunkConcurrency,
+  };
+}
+
+function parsePositiveInt(flag: string): (raw: string) => number {
+  return (raw: string) => {
+    const n = Number.parseInt(raw, 10);
+    if (!Number.isInteger(n) || n < 1) {
+      throw new CliError(
+        `${flag} must be a positive integer, got: ${raw}`,
+        1,
+        { code: "INVALID_ARGUMENT" },
+      );
+    }
+    return n;
+  };
+}
+
+function parseNonNegativeInt(flag: string): (raw: string) => number {
+  return (raw: string) => {
+    const n = Number.parseInt(raw, 10);
+    if (!Number.isInteger(n) || n < 0) {
+      throw new CliError(
+        `${flag} must be a non-negative integer, got: ${raw}`,
+        1,
+        { code: "INVALID_ARGUMENT" },
+      );
+    }
+    return n;
+  };
 }
 
 async function readStdin(): Promise<string> {

@@ -48,6 +48,62 @@ describe("actor registry loader", () => {
     expect(registry.sourcePath).toBe(discoveredPath);
   });
 
+  it("parses chunking synthesis fields in snake_case form", async () => {
+    const tempDir = await mkdtemp(join(tmpdir(), "tts-cli-"));
+    const path = join(tempDir, "actor.yaml");
+    await writeFile(
+      path,
+      [
+        "version: 1",
+        "actors:",
+        "  reader:",
+        "    provider: elevenlabs",
+        "    model: eleven_v3",
+        "    voice: voice_x",
+        "    synthesis:",
+        "      max_chunk_chars: 1500",
+        "      crossfade_ms: 80",
+        "      chunk_concurrency: 2",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    const registry = await loadActorRegistry({ actorFile: path });
+    expect(registry.actors.reader.synthesis).toEqual({
+      maxChunkChars: 1500,
+      crossfadeMs: 80,
+      chunkConcurrency: 2,
+    });
+  });
+
+  it("parses chunking synthesis fields in camelCase form", async () => {
+    const tempDir = await mkdtemp(join(tmpdir(), "tts-cli-"));
+    const path = join(tempDir, "actor.yaml");
+    await writeFile(
+      path,
+      [
+        "version: 1",
+        "actors:",
+        "  reader:",
+        "    provider: openai",
+        "    model: gpt-4o-mini-tts",
+        "    voice: alloy",
+        "    synthesis:",
+        "      maxChunkChars: 1200",
+        "      crossfadeMs: 40",
+        "      chunkConcurrency: 3",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    const registry = await loadActorRegistry({ actorFile: path });
+    expect(registry.actors.reader.synthesis).toMatchObject({
+      maxChunkChars: 1200,
+      crossfadeMs: 40,
+      chunkConcurrency: 3,
+    });
+  });
+
   it("includes YAML parser details for invalid registries", async () => {
     const tempDir = await mkdtemp(join(tmpdir(), "tts-cli-"));
     const brokenPath = join(tempDir, "actor.yaml");

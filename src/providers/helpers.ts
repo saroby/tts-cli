@@ -4,6 +4,16 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 
 import { CliError } from "../shared/errors.js";
 import { hasOwn, isRecord } from "../shared/object.js";
+import type { ChunkContext } from "./types.js";
+
+export function resolveChunkText(
+  chunk: ChunkContext | undefined,
+  side: "previousText" | "nextText",
+  options: Record<string, unknown> | undefined,
+  fallbackKeys: string[],
+): string | undefined {
+  return chunk?.[side] ?? getStringOption(options, fallbackKeys);
+}
 
 export function normalizeOutputFormat(format: string | undefined): string {
   return (format ?? "mp3").trim().toLowerCase();

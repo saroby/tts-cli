@@ -8,12 +8,20 @@ import {
   getStringOption,
   localeToLanguage,
   mimeTypeForFormat,
+  resolveChunkText,
 } from "./helpers.js";
 
 const ELEVENLABS_BASE_URL = "https://api.elevenlabs.io/v1";
 
+const ELEVENLABS_CHUNKABLE_FORMATS: ReadonlySet<string> = new Set(["mp3"]);
+
 export const elevenLabsAdapter: ProviderAdapter = {
   name: "elevenlabs",
+  capabilities: {
+    textLimit: { hardMaxChars: 5000, defaultSoftTarget: 2500 },
+    context: { previousNextText: true },
+    chunkableFormats: ELEVENLABS_CHUNKABLE_FORMATS,
+  },
 
   async dryRun(request) {
     const prepared = prepareRequest(request);
@@ -76,14 +84,8 @@ function prepareRequest(request: ProviderSynthesisRequest): {
     "apply_text_normalization",
     "applyTextNormalization",
   ]);
-  const previousText = getStringOption(request.actor.providerOptions, [
-    "previous_text",
-    "previousText",
-  ]);
-  const nextText = getStringOption(request.actor.providerOptions, [
-    "next_text",
-    "nextText",
-  ]);
+  const previousText = resolveChunkText(request.context?.chunk, "previousText", request.actor.providerOptions, ["previous_text", "previousText"]);
+  const nextText = resolveChunkText(request.context?.chunk, "nextText", request.actor.providerOptions, ["next_text", "nextText"]);
 
   if (optimizeStreamingLatency !== undefined) {
     query.set("optimize_streaming_latency", String(optimizeStreamingLatency));

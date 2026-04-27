@@ -10,10 +10,37 @@ export interface ProviderRequestPreview {
   notes?: string[];
 }
 
+export interface ChunkContext {
+  index: number;
+  total: number;
+  previousText?: string;
+  nextText?: string;
+}
+
+export interface ProviderRequestContext {
+  chunk?: ChunkContext;
+}
+
 export interface ProviderSynthesisRequest {
   actor: ResolvedActor;
   text: string;
   format: string;
+  context?: ProviderRequestContext;
+}
+
+export interface ProviderTextLimit {
+  hardMaxChars: number;
+  defaultSoftTarget?: number;
+}
+
+export interface ProviderContextSupport {
+  previousNextText?: boolean;
+}
+
+export interface ProviderCapabilities {
+  textLimit?: ProviderTextLimit;
+  context?: ProviderContextSupport;
+  chunkableFormats?: ReadonlySet<string>;
 }
 
 export interface ProviderDryRunResult {
@@ -30,6 +57,7 @@ export interface ProviderSynthesisResult {
 
 export interface ProviderAdapter {
   readonly name: string;
+  readonly capabilities?: ProviderCapabilities;
   dryRun(request: ProviderSynthesisRequest): Promise<ProviderDryRunResult>;
   synthesize(request: ProviderSynthesisRequest): Promise<ProviderSynthesisResult>;
 }

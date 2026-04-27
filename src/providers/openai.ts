@@ -10,8 +10,16 @@ import {
 const OPENAI_BASE_URL = "https://api.openai.com/v1";
 const SUPPORTED_FORMATS = new Set(["mp3", "wav", "opus", "aac", "flac", "pcm"]);
 
+const OPENAI_CHUNKABLE_FORMATS: ReadonlySet<string> = new Set([
+  "mp3", "wav", "aac", "opus", "flac",
+]);
+
 export const openAiAdapter: ProviderAdapter = {
   name: "openai",
+  capabilities: {
+    textLimit: { hardMaxChars: 4096, defaultSoftTarget: 2000 },
+    chunkableFormats: OPENAI_CHUNKABLE_FORMATS,
+  },
 
   async dryRun(request) {
     const prepared = prepareRequest(request);

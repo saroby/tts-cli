@@ -12,8 +12,14 @@ import {
 const CARTESIA_BASE_URL = "https://api.cartesia.ai";
 const CARTESIA_VERSION = "2026-03-01";
 
+const CARTESIA_CHUNKABLE_FORMATS: ReadonlySet<string> = new Set(["mp3", "wav"]);
+
 export const cartesiaAdapter: ProviderAdapter = {
   name: "cartesia",
+  capabilities: {
+    textLimit: { hardMaxChars: 2500, defaultSoftTarget: 1500 },
+    chunkableFormats: CARTESIA_CHUNKABLE_FORMATS,
+  },
 
   async dryRun(request) {
     const prepared = prepareRequest(request);

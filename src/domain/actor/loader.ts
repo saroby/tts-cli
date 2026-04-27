@@ -228,6 +228,9 @@ function parseSynthesisOptions(
   const pitch = readOptionalNumber(value, "pitch");
   const volume = readOptionalNumber(value, "volume");
   const format = readOptionalString(value, "format");
+  const maxChunkChars = readChunkField(value, "max_chunk_chars", "maxChunkChars");
+  const crossfadeMs = readChunkField(value, "crossfade_ms", "crossfadeMs");
+  const chunkConcurrency = readChunkField(value, "chunk_concurrency", "chunkConcurrency");
 
   if (speed !== undefined) {
     synthesis.speed = speed;
@@ -243,6 +246,18 @@ function parseSynthesisOptions(
 
   if (format !== undefined) {
     synthesis.format = format;
+  }
+
+  if (maxChunkChars !== undefined) {
+    synthesis.maxChunkChars = maxChunkChars;
+  }
+
+  if (crossfadeMs !== undefined) {
+    synthesis.crossfadeMs = crossfadeMs;
+  }
+
+  if (chunkConcurrency !== undefined) {
+    synthesis.chunkConcurrency = chunkConcurrency;
   }
 
   return Object.keys(synthesis).length > 0 ? synthesis : undefined;
@@ -289,6 +304,14 @@ function readOptionalString(
   }
 
   return field;
+}
+
+function readChunkField(
+  value: Record<string, unknown>,
+  snakeKey: string,
+  camelKey: string,
+): number | undefined {
+  return readOptionalNumber(value, snakeKey) ?? readOptionalNumber(value, camelKey);
 }
 
 function readOptionalNumber(

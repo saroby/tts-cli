@@ -6,8 +6,11 @@ import type { ParsedScript, SpeechNode } from "../domain/script/types.js";
 import type { ProviderRequestPreview } from "../providers/types.js";
 import { CliError } from "../shared/errors.js";
 import { ensureDirectory, writeJsonFile } from "../shared/fs.js";
+import { runConcurrent } from "../shared/concurrency.js";
 import { prepareSpeech, dryRunSay, executeSay } from "./say.js";
 import type { PreparedSpeech, RunExecutionResult, RunManifest, RunManifestItem, RunOptions } from "./types.js";
+
+export { runConcurrent };
 
 export async function dryRunScript(
   parsedScript: ParsedScript,
@@ -23,8 +26,9 @@ export async function dryRunScript(
     try {
       prepared = prepareSpeech(registry, speech.actor, speech.text, {
         format: options.format,
+        chunkOverrides: options.chunkOverrides,
       });
-      const preview = await dryRunSay(prepared);
+      const preview = await dryRunSay(prepared, options.chunkOverrides);
       fileName = options.outDir
         ? buildOutputFileName(index, preview.actor, preview.format)
         : undefined;
@@ -38,6 +42,8 @@ export async function dryRunScript(
         file: fileName,
         status: "dry-run",
         request: preview.request,
+        chunking: preview.chunking,
+        chunks: preview.chunks,
       });
     } catch (error) {
       items.push(buildErrorItem(index, speech, error, prepared, fileName));
@@ -63,16 +69,14 @@ export async function executeScript(
   const parentDir = dirname(outputDirectory);
   await ensureDirectory(parentDir);
 
-  // Stage outputs in a temp directory (sibling, same filesystem for atomic rename)
   const stagingDir = await mkdtemp(join(parentDir, ".tts-run-"));
 
   const speeches = parsedScript.speechNodes;
   const items: RunManifestItem[] = new Array(speeches.length);
   let hasErrors = false;
-  const concurrency = Math.max(1, options.concurrency ?? 1);
 
   try {
-    await runConcurrent(speeches.length, concurrency, async (offset) => {
+    await runConcurrent(speeches.length, options.concurrency ?? 1, async (offset) => {
       const speech = speeches[offset];
       const index = offset + 1;
       let prepared: PreparedSpeech | undefined;
@@ -81,10 +85,12 @@ export async function executeScript(
       try {
         prepared = prepareSpeech(registry, speech.actor, speech.text, {
           format: options.format,
+          chunkOverrides: options.chunkOverrides,
         });
         fileName = buildOutputFileName(index, prepared.actor.name, prepared.format);
-        await executeSay(prepared, resolve(stagingDir, fileName), {
+        const result = await executeSay(prepared, resolve(stagingDir, fileName), {
           trimSilence: options.trimSilence,
+          chunkOverrides: options.chunkOverrides,
         });
         items[offset] = {
           index,
@@ -95,13 +101,14 @@ export async function executeScript(
           text: prepared.text,
           file: fileName,
           status: "ok",
+          chunking: result.chunking,
         };
       } catch (error) {
         hasErrors = true;
         let request: ProviderRequestPreview | undefined;
         if (prepared) {
           try {
-            const preview = await dryRunSay(prepared);
+            const preview = await dryRunSay(prepared, options.chunkOverrides);
             request = preview.request;
           } catch {
             // dry-run also failed; skip request capture
@@ -117,19 +124,15 @@ export async function executeScript(
     };
     await writeJsonFile(resolve(stagingDir, "manifest.json"), manifest);
 
-    // Atomic swap: remove old output directory, rename staging into place
     await rm(outputDirectory, { recursive: true, force: true });
     await rename(stagingDir, outputDirectory);
 
-    const manifestPath = resolve(outputDirectory, "manifest.json");
-
     return {
       manifest,
-      manifestPath,
+      manifestPath: resolve(outputDirectory, "manifest.json"),
       hasErrors,
     };
   } catch (error) {
-    // Clean up staging directory on unexpected failure
     await rm(stagingDir, { recursive: true, force: true }).catch(() => {});
     throw error;
   }
@@ -170,32 +173,4 @@ function buildErrorItem(
     error: message,
     request,
   };
-}
-
-export async function runConcurrent(
-  count: number,
-  concurrency: number,
-  fn: (index: number) => Promise<void>,
-): Promise<void> {
-  if (!Number.isFinite(concurrency)) {
-    concurrency = 1;
-  }
-  if (concurrency <= 1) {
-    for (let i = 0; i < count; i++) {
-      await fn(i);
-    }
-    return;
-  }
-
-  let next = 0;
-  async function worker(): Promise<void> {
-    while (next < count) {
-      const i = next++;
-      await fn(i);
-    }
-  }
-
-  await Promise.all(
-    Array.from({ length: Math.min(concurrency, count) }, () => worker()),
-  );
 }
